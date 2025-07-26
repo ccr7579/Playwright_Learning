@@ -1,0 +1,29 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - main # or your default branch
+  pull_request:
+    branches:
+      - main # or your default branch
+
+permissions: {} # No permissions required for basic linting
+
+jobs:
+  build:
+    name: Lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # Required to checkout code
+      packages: read # If using private packages
+      statuses: write # To report GitHub Actions status checks
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Super-linter needs full git history for changed files
+
+      - name: Super-linter
+        uses: super-linter/super-linter@v7.1.0 # Use the latest stable version

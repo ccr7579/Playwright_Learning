@@ -32,3 +32,15 @@ jobs:
           VALIDATE_TYPESCRIPT: true
           VALIDATE_JAVASCRIPT_ES: true
           DEFAULT_BRANCH: main
+
+  trufflehog:
+    name: TruffleHog OSS Secret Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run TruffleHog OSS
+        uses: trufflesecurity/trufflehog@main
+        with:
+          scanArguments: --fail --no-update --json .

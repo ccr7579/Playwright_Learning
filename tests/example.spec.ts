@@ -16,16 +16,3 @@ test('get started link', async ({ page }) => {
   // Expects page to have a heading with the name of Installation.
   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 }); 
-
-const test = {
-  name: 'test',
-  key: 'Test@123',
-  password: 'Test@123',
-  email: 'test@test.com',
-  phone: '1234567890',
-  address: '123 Main St, Anytown, USA',
-  city: 'Anytown',
-  state: 'CA',
-  zip: '12345',
-  country: 'USA',
-}

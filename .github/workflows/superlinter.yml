@@ -28,8 +28,7 @@ jobs:
       - name: Super-linter
         uses: super-linter/super-linter@v7.1.0 # Use the latest stable version
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for status checks
-          # Add other Super Linter environment variables for customization here
-          # For example:
-          # VALIDATE_JAVASCRIPT_ES: true
-          # DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_TYPESCRIPT: true
+          VALIDATE_JAVASCRIPT_ES: true
+          DEFAULT_BRANCH: main

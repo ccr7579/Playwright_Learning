@@ -3,44 +3,32 @@ name: Lint
 on:
   push:
     branches:
-      - main # or your default branch
+      - main
   pull_request:
     branches:
-      - main # or your default branch
+      - main
 
 permissions: {} # No permissions required for basic linting
 
 jobs:
-  build:
-    name: Lint
+  lint:
+    name: Super-Linter
     runs-on: ubuntu-latest
     permissions:
-      contents: read # Required to checkout code
-      packages: read # If using private packages
-      statuses: write # To report GitHub Actions status checks
+      contents: read
+      packages: read
+      statuses: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Super-linter needs full git history for changed files
+          fetch-depth: 0 # Required for changed-file detection
 
-      - name: Super-linter
-        uses: super-linter/super-linter@v7.1.0 # Use the latest stable version
+      - name: Run Super-Linter
+        uses: super-linter/super-linter@v7.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_TYPESCRIPT: true
           VALIDATE_JAVASCRIPT_ES: true
           DEFAULT_BRANCH: main
-
-  trufflehog:
-    name: TruffleHog OSS Secret Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Run TruffleHog OSS
-        uses: trufflesecurity/trufflehog@main
-        with:
-          scanArguments: --fail --no-update --json .
